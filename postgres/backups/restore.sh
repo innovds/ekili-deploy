@@ -9,7 +9,7 @@ BACKUP_DIR="/backups"
 db="ekili"
 
 # Utilisation de getopts pour traiter les options
-while getopts h:p:d:U:P:f:b:D:S:C: flag
+while getopts h:p:d:U:P:f:b:D:S:C:R: flag
 do
     case "${flag}" in
         h) PGHOST=${OPTARG};;
