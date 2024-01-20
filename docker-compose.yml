@@ -1,0 +1,43 @@
+version: "3"
+
+networks:
+  default:
+    name: ekili-net
+services:
+  db:
+    container_name: postgres
+    image: postgres:16
+    # restart: always
+    # restart: unless-stopped
+    shm_size: 2g
+    environment:
+      - POSTGRES_PASSWORD=Post_ADmin_PASs09
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    # ports:
+    #   - 5432:5432
+    volumes:
+      # - ./postgres/data:/var/lib/postgresql/data/pgdata
+      - ./postgres/init:/docker-entrypoint-initdb.d
+      - ./postgres/backups:/backups
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: mail@mail.com
+  #     PGADMIN_DEFAULT_PASSWORD: PG_ADmiN_PasS28
+  #   # ports:
+  #   #   - 180:80
+
+  ekili:
+    image: innovds/ekili:1.0
+    # restart: always
+    # restart: unless-stopped
+    depends_on:
+      - "db"
+    environment:
+      MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED: "false"
+      SPRING_DATASOURCE_URL: 'jdbc:postgresql://db:5432/ekili'
+      SPRING_DATASOURCE_USERNAME: ekili_user
+      SPRING_DATASOURCE_PASSWORD: EkilI-p@Ss
+      SPRING_PROFILES_ACTIVE: prod
+    ports:
+      - 9080:8080
