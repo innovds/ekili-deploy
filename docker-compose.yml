@@ -19,13 +19,13 @@ services:
       # - ./postgres/data:/var/lib/postgresql/data/pgdata
       - ./postgres/init:/docker-entrypoint-initdb.d
       - ./postgres/backups:/backups
-  # pgadmin:
-  #   image: dpage/pgadmin4
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: mail@mail.com
-  #     PGADMIN_DEFAULT_PASSWORD: PG_ADmiN_PasS28
-  #   # ports:
-  #   #   - 180:80
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: mail@mail.com
+      PGADMIN_DEFAULT_PASSWORD: PG_ADmiN_PasS28
+    ports:
+      - 180:80
 
   ekili:
     image: innovds/ekili:1.0
